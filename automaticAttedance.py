@@ -11,15 +11,13 @@ import time
 import tkinter.ttk as tkk
 import tkinter.font as font
 
-haarcasecade_path = "C:\\Users\\patel\\OneDrive\\Documents\\E\\FBAS\\haarcascade_frontalface_default.xml"
-trainimagelabel_path = (
-    "C:\\Users\\patel\\OneDrive\\Documents\\E\\FBAS\\TrainingImageLabel\\Trainner.yml"
-)
-trainimage_path = "C:\\Users\\patel\\OneDrive\\Documents\\E\\FBAS\\TrainingImage"
-studentdetail_path = (
-    "C:\\Users\\patel\\OneDrive\\Documents\\E\\FBAS\\StudentDetails\\studentdetails.csv"
-)
-attendance_path = "C:\\Users\\patel\\OneDrive\\Documents\\E\\FBAS\\Attendance"
+haarcasecade_path = "/Users/donginseo/dev/Attendance-Management-system-using-face-recognition/haarcascade_frontalface_default.xml"
+trainimagelabel_path = "/Users/donginseo/dev/Attendance-Management-system-using-face-recognition/TrainingImageLabel"
+trainimage_path = "/Users/donginseo/dev/Attendance-Management-system-using-face-recognition/TrainingImage"
+studentdetail_path = "/Users/donginseo/dev/Attendance-Management-system-using-face-recognition/studentdetails.csv"
+attendance_path = "/Users/donginseo/dev/Attendance-Management-system-using-face-recognition/Attendance"
+
+
 # for choose subject and fill attendance
 def subjectChoose(text_to_speech):
     def FillAttendance():
@@ -57,7 +55,7 @@ def subjectChoose(text_to_speech):
                     ___, im = cam.read()
                     gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
                     faces = facecasCade.detectMultiScale(gray, 1.2, 5)
-                    for (x, y, w, h) in faces:
+                    for x, y, w, h in faces:
                         global Id
 
                         Id, conf = recognizer.predict(gray[y : y + h, x : x + w])
@@ -85,7 +83,17 @@ def subjectChoose(text_to_speech):
                             ]
                             cv2.rectangle(im, (x, y), (x + w, y + h), (0, 260, 0), 4)
                             cv2.putText(
-                                im, str(tt), (x + h, y), font, 1, (255, 255, 0,), 4
+                                im,
+                                str(tt),
+                                (x + h, y),
+                                font,
+                                1,
+                                (
+                                    255,
+                                    255,
+                                    0,
+                                ),
+                                4,
                             )
                         else:
                             Id = "Unknown"
